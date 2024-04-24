@@ -10,10 +10,12 @@ O **Cadastro de Itens** é um software desenvolvido em Python utilizando as bibl
 
 - **Funcionalidades**:
   - Inserção de informações sobre o item (nome, EAN, descrição, quantidade, preço).
-  - Registro dos itens em uma lista.
+  - Tratamento e validação dos dados inseridos na interface principal `try Except`.
+  - Registro dos itens em uma lista primaria.
   - Visualização dos itens registrados em uma tabela.
   - Exportação dos dados para uma planilha eletrônica em formato Excel (.xlsx).
-
+  - Registro dos dados em um BD externo.
+    
 ## Estrutura do Código
 
 O código está estruturado da seguinte maneira:
@@ -32,6 +34,9 @@ O código está estruturado da seguinte maneira:
 
 - **Interação com pandas**:
   - Uso do pandas para manipulação e exportação dos dados para uma planilha Excel.
+
+- **Interação com MySQL**:
+  - O sistema usa SQL em sua estrutura principal para armazenamento, leitura e manipulação de dados `mysql.connector.connect`.
 
 ## Uso
 
