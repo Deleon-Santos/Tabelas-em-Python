@@ -1,4 +1,4 @@
-#Estou desenvolvendo um sistema que colete dados e transforme numa planilha eletronica
+#Estou desenvolvendo um sistema integrado ao bd SQL que colete dados e transforme numa planilha eletronica
 import PySimpleGUI as sg
 import pandas as pd
 import mysql.connector
@@ -51,29 +51,37 @@ while True:
         break
         
     elif event == "REGISTRAR": # Obter valores dos campos de entrada
-        novo_registro = [
-            values["-ITEM-"],
-            values["-EAN-"],
+        try:
+            item=int(values["-ITEM-"].strip())
+            ean=int(values["-EAN-"].strip())
             
-            values["-QTD-"],
-            values["-PRECO-"],
-            values["-DESC-"],]
+            qtd=int(values["-QTD-"].strip())
+            valor=float(values["-PRECO-"].strip())
+            descricao=str(values["-DESC-"].strip().upper())
+        except ValueError:
+            sg.popup('Erro em valores. ')
+            continue
+        if not item or not ean or not qtd or not valor or not descricao:
+            sg.popup('Deve preencher todos os campos')
+        else:
+            
+            novo_registro=[item,ean,qtd,valor,descricao]
 
-        lista.append(novo_registro)
-        window["-TABELA-"].update(values=lista)
+            lista.append(novo_registro)
+            window["-TABELA-"].update(values=lista)
 
-        insert_query = "INSERT INTO novo_item (itemId, ean,  qtd, valor, descricao) VALUES (%s, %s, %s, %s, %s)"
-        cursor.execute(insert_query, novo_registro)
-        db_connection.commit()
+            insert_query = "INSERT INTO novo_item (itemId, ean,  qtd, valor, descricao) VALUES (%s, %s, %s, %s, %s)"
+            cursor.execute(insert_query, novo_registro)
+            db_connection.commit()
 
-        select_query = "SELECT itemId, ean,  qtd, valor, descricao FROM novo_item"
-        cursor.execute(select_query)
-        retrieved_data = cursor.fetchall()
+            select_query = "SELECT itemId, ean,  qtd, valor, descricao FROM novo_item"
+            cursor.execute(select_query)
+            retrieved_data = cursor.fetchall()
 
-        
-        lista = [list(row) for row in retrieved_data]
-        
-        window["-TABELA-"].update(values=lista)
+            
+            lista = [list(row) for row in retrieved_data]
+            
+            window["-TABELA-"].update(values=lista)
 
     elif event =="PESQUISAR":
         select_query = "SELECT itemId, ean, qtd, valor, descricao FROM novo_item ORDER BY itemId ASC"
