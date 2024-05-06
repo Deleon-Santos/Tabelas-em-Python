@@ -1,6 +1,6 @@
 # Documentação do Software Cadastro de Itens
 
-O **Cadastro de Itens** é um software desenvolvido em Python utilizando as bibliotecas PySimpleGUI e pandas. Ele oferece uma interface gráfica simples para o usuário inserir informações sobre itens, como nome, código EAN, descrição, quantidade e preço, e permite exportar esses dados para uma planilha eletrônica.
+O **Cadastro de Itens** é um software desenvolvido em Python utilizando as bibliotecas PySimpleGUI e pandas. Ele oferece uma interface gráfica simples para o usuário inserir informações sobre itens, como nome, código EAN, descrição, quantidade e preço, e permite exportar esses dados para uma planilha eletrônica .
 
 ## Recursos Principais
 
